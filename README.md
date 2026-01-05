@@ -1,8 +1,5 @@
 # 酷狗签到
 
-GitHub Actions 实现 `酷狗概念VIP` 自动签到
-每天领取总计 `两天酷狗概念VIP`
-
 <table align="center">
   <tr>
     <th>登录</th>
