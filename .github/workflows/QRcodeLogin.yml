@@ -2,12 +2,27 @@ name: QRcodeLogin
 on:
   workflow_dispatch:
 
+env:
+  PAT: ${{ secrets.PAT }}
 
 jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
+      - name: 验证 PAT 配置
+        if: env.PAT == ''
+        run: |
+          echo "❌ 错误: PAT 密钥未配置"
+          echo "请按照以下步骤配置:"
+          echo "1. 访问 https://github.com/settings/tokens/new"
+          echo "2. Note: 随便填"
+          echo "   Expiration: No expiration"
+          echo "   Select scopes: 选择 repo 权限 (推荐全选)"
+          echo "3. 点击Generate token创建并复制ghp开头的令牌"
+          echo "4. 在仓库设置中添加: Settings → Secrets and variables → Actions → New repository secret"
+          echo "5. 名称: PAT, 值: 粘贴您的 token令牌"
+          exit 1
       - name: 检出仓库
         uses: actions/checkout@v3
         with:
